@@ -1,12 +1,12 @@
 #include "mbed.h"
-
+#include <cstdio>
 
 
  InterruptIn BUTTON(PC_13); // Initialise the User button as the interupt button
 DigitalOut led(LED1) ;
         // Initialise the digital pin LED1 as an output
 
-volatile char ispressed = 0;
+volatile int ispressed = 0;
 
 void BUTTON_pressed(){
     led = 1;
@@ -14,12 +14,12 @@ void BUTTON_pressed(){
 }
 int main()
 {
-        printf("This is Mbed OS %d.%d.%d. \r\n\n", MBED_MAJOR_VERSION, MBED_MINOR_VERSION, MBED_PATCH_VERSION);
-        BUTTON.fall(&BUTTON_pressed);
+        
+        BUTTON.fall(&BUTTON_pressed);   //action to be taken when button is in fall (pushed)
         led = 0;
         while (true) {
-            if (ispressed = 1) {
-                printf("button pressed! %d \r\n",ispressed);
+            if (ispressed == 1) {
+                printf("button pressed! %d \r\n",ispressed); //print to the command screen that the button has been pushed 
                 ispressed = 0;
                 led = 0;
             }
